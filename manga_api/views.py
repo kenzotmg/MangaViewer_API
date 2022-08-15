@@ -1,11 +1,7 @@
-from urllib.error import HTTPError
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseNotFound, JsonResponse
-from django.shortcuts import render
-import requests
 from . import util
 import logging
 from colorama import init, Fore, Back, Style
-import base64
 
 logging.basicConfig(format=f'%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 init(autoreset=True)

@@ -2,13 +2,17 @@ from enum import auto
 import os
 from colorama import init, Style, Fore
 import logging
-import base64
 import re
+import environ
+import os
+
 init(autoreset=True)
 logging.basicConfig(format=f'%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+env = environ.Env()
+
 # CONSTANTS
-MANGA_DIR = r'E:\estudo\projetos\webscraping_neoxscans\Mangas_formatted'
+MANGA_DIR = env('MANGA_DIR')
 
 
 # Returns a dictionary where KEY = Manga Name and VALUE = Latest Chapter
@@ -29,7 +33,6 @@ def get_mangas():
     return mangas
 
     
-    
 def get_manga_chapter(manga_name, chapter, host):
     for manga in os.listdir(MANGA_DIR):
         if filter_str(manga) == manga_name:
@@ -49,7 +52,7 @@ def get_manga_chapter(manga_name, chapter, host):
         
     return images_url
 
-
+# Filter out any special character and spaces in string
 def filter_str(text):
     return ''.join(e for e in text if e.isalnum()).lower()
 
@@ -70,7 +73,7 @@ def getMangaOriginalName(manga_name):
             return manga
     
 
-
+# Functions to sort alphabetically files with number in their names
 def atoi(text):
     return int(text) if text.isdigit() else text
 
