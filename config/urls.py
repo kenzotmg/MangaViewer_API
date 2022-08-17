@@ -21,5 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("mangas/", views.list_all_mangas),
     path("<str:manga_name>/<int:chapter>/", views.get_manga_chapter),
-    path("<str:manga_name>/<int:chapter>/<str:image_file>", views.get_manga_images)
+    path("<str:manga_name>/<int:chapter>/<str:image_file>", views.get_manga_images),
+    path("<str:manga_name>/thumb/", views.get_manga_thumb)
 ]

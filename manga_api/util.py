@@ -13,7 +13,7 @@ env = environ.Env()
 
 # CONSTANTS
 MANGA_DIR = env('MANGA_DIR')
-
+MANGA_THUMB_DIR = env('MANGA_THUMB_DIR')
 
 # Returns a dictionary where KEY = Manga Name and VALUE = Latest Chapter
 def get_mangas():
@@ -57,7 +57,7 @@ def filter_str(text):
     return ''.join(e for e in text if e.isalnum()).lower()
 
 
-def doesFileExists(manga_name, chapter, file):
+def doesChapterFileExists(manga_name, chapter, file):
     path = MANGA_DIR + f"\{manga_name}" + f"\{chapter:02d}" + f"\{file}"
     if os.path.exists(path):
         with open(path, 'rb') as image_file:
@@ -66,6 +66,15 @@ def doesFileExists(manga_name, chapter, file):
     
     else:
         return False
+            
+def doesThumbFileExists(manga_name):
+    path = MANGA_THUMB_DIR + f"\{manga_name}" + fr"/thumb.jpg"
+    if os.path.exists(path):
+        with open(path, 'rb') as image_file:
+            file_binary = image_file.read()
+        return file_binary
+    
+    return False
             
 def getMangaOriginalName(manga_name):
     for manga in os.listdir(MANGA_DIR):
